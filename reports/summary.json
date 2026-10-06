@@ -1,0 +1,13 @@
+{
+  "checkpoint_bytes": 22642902,
+  "sha256": "04766eac0221b5390b985ae3fdcca652cbb4b1e8b82b28ea7ff89dfad1b1a93f",
+  "decoder_file_bytes": 19695110,
+  "encoder": {
+    "tensors": 64,
+    "parameters": 1470928
+  },
+  "decoder": {
+    "tensors": 64,
+    "parameters": 9844611
+  }
+}

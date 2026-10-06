@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wan Video Latent Laboratory</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><h1>WAN VIDEO LATENT LABORATORY</h1><p>TAEW2.1 / decoder only / numerical inspection</p><div id="machine">连接本地计算服务…</div></header>
+<nav aria-label="实验视图">
+ <button data-tab="latent" aria-selected="true">01. INPUT LATENT</button>
+ <button data-tab="weights" aria-selected="false">02. DECODER WEIGHTS</button>
+ <button data-tab="trace" aria-selected="false">03. FORWARD TRACE</button>
+ <button data-tab="output" aria-selected="false">04. RGB OUTPUT</button>
+</nav>
+<div class="runbar"><span id="revision">—</span><button id="decode">运行 VAE decode →</button><span id="job-status" role="status">就绪</span><progress id="progress" max="1" value="0" aria-label="计算进度"></progress></div>
+<div id="error" role="alert" hidden></div>
+
+<main inert>
+<section id="latent" data-panel>
+ <div class="section-title"><h2>输入张量 z[C,T,H,W]</h2><span id="shape"></span></div>
+ <div class="toolbar">
+  <label>Seed <input id="seed" type="number" min="0" max="4294967295" value="42"></label>
+  <label>尺寸 <select id="preset"><option value="full">16 × 21 × 60 × 104</option><option value="small">16 × 5 × 12 × 20（快速实验）</option></select></label>
+  <button id="initialize">重新初始化 N(0,1)</button><button id="restore">恢复本次初始值</button><a href="/api/latent.npy" download>导出 .npy</a>
+ </div>
+ <p class="note">随机初始化用于观察数值传播；输出可能是纹理或噪声，不代表自然视频。所有索引从 0 开始。</p>
+ <div class="toolbar slice-controls"><label>时间截面 t <input id="time-number" type="number" min="0" value="0"></label><input id="time-range" type="range" min="0" value="0" aria-label="时间剖面"><span id="time-label"></span><label>色标 ±<input id="color-limit" type="number" min="0.1" step="0.5" value="3"></label></div>
+ <div class="legend"><span class="negative"></span>负值 <span class="neutral"></span>0 <span class="positive"></span>正值；所有 channel 共用色标，越界只截断颜色、不截断数据。鼠标滚轮移动剖面。</div>
+ <div id="volume-grid" class="volume-grid" aria-label="16 个 latent channel 体积剖面"></div>
+ <div class="detail-layout">
+  <div><h3>选中通道的完整截面 <span id="slice-title"></span></h3><canvas id="latent-plane" width="832" height="480" aria-label="选中 latent 通道截面，点击选择坐标"></canvas><div id="plane-hover" class="note">点击像素定位；下方表格显示邻域数字。</div></div>
+  <div class="inspector"><h3>单个 scalar / 精确编辑</h3>
+   <div class="toolbar coordinates"><label>c <input id="coord-c" type="number" value="0" min="0"></label><label>t <input id="coord-t" type="number" value="0" min="0"></label><label>y <input id="coord-y" type="number" value="0" min="0"></label><label>x <input id="coord-x" type="number" value="0" min="0"></label></div>
+   <code id="address"></code><div id="scalar-scrub" class="scrub" role="button" tabindex="0" aria-label="上下拖动调整选中数值；方向键也可调整">—</div>
+   <p class="note">按住数字上下拖动：0.01 / px；Shift：0.001 / px。表格内数字也可拖动。双击数字后可键盘输入。</p>
+   <label>新数值 <input id="scalar-value" type="number" step="any"></label><button id="set-scalar">写入此数值</button><p id="baseline-value"></p><button id="follow-scalar">从这个截面开始追踪 →</button>
+   <details><summary>区域 / channel / 时间段加法</summary><div class="toolbar"><select id="edit-mode" aria-label="批量编辑范围"><option value="region">当前 channel 的区域</option><option value="channel">整个 channel</option><option value="time">时间段内全部 channels</option></select><label>Δ <input id="delta" type="number" value="0.1" step="0.1"></label></div><div class="toolbar"><label>ΔT <input id="extent-t" type="number" value="1" min="1"></label><label>ΔY <input id="extent-y" type="number" value="2" min="1"></label><label>ΔX <input id="extent-x" type="number" value="2" min="1"></label><button id="apply-region">执行 z += Δ</button></div><p class="note">以当前坐标为起点；区间不包括终点。每次点击在当前数据上累加。</p></details>
+  </div>
+ </div>
+ <h3>局部数值窗口（中心为所选坐标）</h3><div class="table-scroll"><table id="number-grid" class="numbers"></table></div>
+ <details><summary>编辑记录</summary><pre id="edit-log">尚无修改</pre></details>
+</section>
+
+<section id="weights" data-panel hidden>
+ <h2>Decoder 参数 / 只读</h2>
+ <p>64 个参数 tensor ≠ 64 个执行层。每层的 weight、bias 分开存储；ReLU、Clamp、reshape、上采样不一定有参数。外层网络有 23 个操作，MemBlock 内含卷积和残差分支。</p>
+ <div class="toolbar"><label>Tensor <select id="weight-select"></select></label><span id="weight-meta"></span></div>
+ <div class="toolbar"><label>输入通道截面 i <input id="weight-input" type="number" min="0" value="0"></label><input id="weight-range" type="range" min="0" value="0" aria-label="权重输入通道剖面"><label>输出通道页 <input id="weight-page" type="number" min="0" value="0"></label><span id="weight-page-label"></span></div>
+ <p class="note" id="weight-axes"></p><div id="weight-volumes" class="volume-grid"></div>
+ <h3 id="kernel-title">选中 kernel</h3><div class="table-scroll"><table id="kernel-values" class="numbers"></table></div><p id="weight-statistics"></p>
+ <details><summary>全部参数清单（名称按实际模块编号排序，不按字符串排序）</summary><div class="table-scroll"><table id="weight-inventory"></table></div></details>
+</section>
+
+<section id="trace" data-panel hidden>
+ <h2>Forward trace / 真实中间激活</h2>
+ <p>z → Clamp → Conv → MemBlock → 空间 / 时间扩张 → RGB → clamp[0,1] → 裁去最前 3 帧。点击操作查看真实计算结果；展开 MemBlock 可进入其内部卷积和激活。</p>
+ <p class="note">MemBlock：当前特征与上一时间位置的特征拼接，经三层卷积后加回当前特征。权重固定，变化的是这里的激活。中间的 t 使用该层自己的时间网格，不能直接当作输入 latent 的 t。</p>
+ <div class="trace-layout"><div class="table-scroll"><table id="stage-table"><thead><tr><th>操作</th><th>输出 [C,T,H,W]</th><th>类型</th></tr></thead><tbody></tbody></table></div>
+ <div><h3 id="trace-title">选择一个操作</h3><p id="trace-description"></p><div class="toolbar"><button id="previous-stage">← 上一操作并计算</button><button id="next-stage">下一操作并计算 →</button><button id="stage-weights">查看此操作的权重</button></div><div class="toolbar"><label>该层 t <input id="trace-time" type="number" min="0" value="0"></label><button id="compute-trace">计算这个时间截面</button><label>channel <input id="trace-channel" type="number" min="0" value="0"></label></div><p id="trace-meta">尚未计算。一次保留一个时间截面的全部 channels，避免存下整条网络的巨量激活。</p><canvas id="activation-plane" width="832" height="480" aria-label="所选中间激活截面"></canvas><p id="activation-value">—</p><h3>所选像素邻域 / 精确数值</h3><div class="table-scroll"><table id="activation-numbers" class="numbers"></table></div></div></div>
+</section>
+
+<section id="output" data-panel hidden>
+ <h2>RGB video / decoder output</h2><div class="toolbar"><label>解码结果 <select id="result-select"><option>尚未解码</option></select></label><span id="result-meta"></span></div>
+ <p class="note">视频是 MP4 预览；下方数据来自压缩前的 float32 RGB，范围 [0,1]。修改 latent 后需重新解码，旧结果始终标明其 revision。</p>
+ <div class="detail-layout"><div><video id="video" controls playsinline preload="metadata"></video><p id="video-empty">点击上方“运行 VAE decode”生成随机 latent 的输出。</p></div><div><h3>单帧 / RGB 数值</h3><div class="toolbar"><label>帧 <input id="rgb-frame" type="number" min="0" value="0"></label><button id="load-frame">读取精确 RGB</button><button id="frame-from-video">读取视频当前帧</button></div><canvas id="rgb-plane" width="832" height="480" aria-label="RGB 帧，点击查看像素"></canvas><p id="rgb-value">—</p><p id="rgb-location"></p></div></div>
+</section>
+</main>
+<footer>Local numerical laboratory · TAEW2.1 · 9,844,611 decoder parameters · 所有数据从本地真实权重和计算结果读取。随机 latent 不具有保证的语义。</footer>
+<script src="/app.js"></script></body></html>

@@ -1,0 +1,1748 @@
+[
+  {
+    "name": "decoder.1.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.61328125,
+    "maximum": 0.27685546875,
+    "mean": -0.09518486075103283,
+    "std": 0.2007666931033523
+  },
+  {
+    "name": "decoder.1.weight",
+    "shape": [
+      256,
+      16,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.464111328125,
+    "maximum": 0.47119140625,
+    "mean": 0.000852753212610777,
+    "std": 0.038524280036567805
+  },
+  {
+    "name": "decoder.10.conv.0.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.271484375,
+    "maximum": 0.0906982421875,
+    "mean": -0.008175082504749298,
+    "std": 0.05761763490405841
+  },
+  {
+    "name": "decoder.10.conv.0.weight",
+    "shape": [
+      128,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 294912,
+    "minimum": -1.3251953125,
+    "maximum": 0.63720703125,
+    "mean": -0.00506388771160952,
+    "std": 0.057151946554720987
+  },
+  {
+    "name": "decoder.10.conv.2.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.1749267578125,
+    "maximum": 0.10675048828125,
+    "mean": -0.007898112758994102,
+    "std": 0.04701564905553353
+  },
+  {
+    "name": "decoder.10.conv.2.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -0.8583984375,
+    "maximum": 0.3564453125,
+    "mean": -0.008899723150130335,
+    "std": 0.05412209979009674
+  },
+  {
+    "name": "decoder.10.conv.4.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.1534423828125,
+    "maximum": 0.1593017578125,
+    "mean": -0.02448388747870922,
+    "std": 0.042060147374978256
+  },
+  {
+    "name": "decoder.10.conv.4.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -1.7470703125,
+    "maximum": 0.46923828125,
+    "mean": -0.006872806769226574,
+    "std": 0.05619215508921734
+  },
+  {
+    "name": "decoder.11.conv.0.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.50244140625,
+    "maximum": 0.168212890625,
+    "mean": -0.012649924494326115,
+    "std": 0.08083155502181553
+  },
+  {
+    "name": "decoder.11.conv.0.weight",
+    "shape": [
+      128,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 294912,
+    "minimum": -1.576171875,
+    "maximum": 0.65673828125,
+    "mean": -0.00461398716025643,
+    "std": 0.0566775088163659
+  },
+  {
+    "name": "decoder.11.conv.2.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.34033203125,
+    "maximum": 0.1263427734375,
+    "mean": -0.006992504931986332,
+    "std": 0.06457950565400465
+  },
+  {
+    "name": "decoder.11.conv.2.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -1.50390625,
+    "maximum": 0.7080078125,
+    "mean": -0.0046477613327119294,
+    "std": 0.04506115803424887
+  },
+  {
+    "name": "decoder.11.conv.4.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.1815185546875,
+    "maximum": 0.07958984375,
+    "mean": -0.021455119363963604,
+    "std": 0.040862745092816816
+  },
+  {
+    "name": "decoder.11.conv.4.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -1.240234375,
+    "maximum": 0.60791015625,
+    "mean": -0.005246237812065778,
+    "std": 0.057108392865070426
+  },
+  {
+    "name": "decoder.13.conv.weight",
+    "shape": [
+      256,
+      128,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 32768,
+    "minimum": -0.1783447265625,
+    "maximum": 0.2103271484375,
+    "mean": -0.00011569438720471226,
+    "std": 0.02836852628262273
+  },
+  {
+    "name": "decoder.14.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.2288818359375,
+    "maximum": 0.241943359375,
+    "mean": -0.00011913199543616631,
+    "std": 0.03539262111171724
+  },
+  {
+    "name": "decoder.15.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.349365234375,
+    "maximum": 0.03564453125,
+    "mean": -0.06843134760856628,
+    "std": 0.0660180394648687
+  },
+  {
+    "name": "decoder.15.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.41552734375,
+    "maximum": 0.34423828125,
+    "mean": 0.0011313958982807687,
+    "std": 0.051276608313670244
+  },
+  {
+    "name": "decoder.15.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.185302734375,
+    "maximum": 0.094482421875,
+    "mean": -0.02165398932993412,
+    "std": 0.047933144686896065
+  },
+  {
+    "name": "decoder.15.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.52392578125,
+    "maximum": 0.2469482421875,
+    "mean": -0.0020035305399990952,
+    "std": 0.042504123001145006
+  },
+  {
+    "name": "decoder.15.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.08038330078125,
+    "maximum": 0.200927734375,
+    "mean": 0.031043164432048798,
+    "std": 0.05541195944302519
+  },
+  {
+    "name": "decoder.15.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.79248046875,
+    "maximum": 0.4755859375,
+    "mean": -0.0018078611966403616,
+    "std": 0.046274791409453904
+  },
+  {
+    "name": "decoder.16.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.35888671875,
+    "maximum": 0.09063720703125,
+    "mean": -0.022025033831596375,
+    "std": 0.08188414239355599
+  },
+  {
+    "name": "decoder.16.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.94970703125,
+    "maximum": 0.55419921875,
+    "mean": -0.0016623902645531213,
+    "std": 0.05362961012497369
+  },
+  {
+    "name": "decoder.16.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.34814453125,
+    "maximum": 0.1929931640625,
+    "mean": -0.018987685441970825,
+    "std": 0.0661860596185205
+  },
+  {
+    "name": "decoder.16.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -1.0078125,
+    "maximum": 0.334716796875,
+    "mean": -0.0028698822635407043,
+    "std": 0.04907876842262288
+  },
+  {
+    "name": "decoder.16.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.10784912109375,
+    "maximum": 0.08221435546875,
+    "mean": -0.01714654266834259,
+    "std": 0.03870834144677309
+  },
+  {
+    "name": "decoder.16.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.8291015625,
+    "maximum": 0.481201171875,
+    "mean": -0.0034008505188264987,
+    "std": 0.05561502179979235
+  },
+  {
+    "name": "decoder.17.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.341552734375,
+    "maximum": 0.180908203125,
+    "mean": -0.0005920231342315674,
+    "std": 0.09207323811924174
+  },
+  {
+    "name": "decoder.17.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -1.43359375,
+    "maximum": 1.1162109375,
+    "mean": -0.0033403491252101958,
+    "std": 0.09075399254936764
+  },
+  {
+    "name": "decoder.17.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.2060546875,
+    "maximum": 0.1453857421875,
+    "mean": 0.008942276239395142,
+    "std": 0.07628666925290997
+  },
+  {
+    "name": "decoder.17.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -1.181640625,
+    "maximum": 0.50927734375,
+    "mean": -0.002964741605359854,
+    "std": 0.07061559586142219
+  },
+  {
+    "name": "decoder.17.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.256591796875,
+    "maximum": 0.19287109375,
+    "mean": 0.013252019882202148,
+    "std": 0.08279760259157083
+  },
+  {
+    "name": "decoder.17.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -3.29296875,
+    "maximum": 0.6796875,
+    "mean": -0.0040455591386287576,
+    "std": 0.0924012288552103
+  },
+  {
+    "name": "decoder.19.conv.weight",
+    "shape": [
+      128,
+      64,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 8192,
+    "minimum": -0.2120361328125,
+    "maximum": 0.251953125,
+    "mean": -0.00016788444918347523,
+    "std": 0.042818178749239266
+  },
+  {
+    "name": "decoder.20.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.457275390625,
+    "maximum": 0.51416015625,
+    "mean": -0.0013266637817853028,
+    "std": 0.07728114062509396
+  },
+  {
+    "name": "decoder.22.bias",
+    "shape": [
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 3,
+    "minimum": 0.17333984375,
+    "maximum": 0.2149658203125,
+    "mean": 0.19051106770833334,
+    "std": 0.01775702346202681
+  },
+  {
+    "name": "decoder.22.weight",
+    "shape": [
+      3,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 1728,
+    "minimum": -0.2325439453125,
+    "maximum": 0.34521484375,
+    "mean": 0.002079653036263254,
+    "std": 0.042936660841227194
+  },
+  {
+    "name": "decoder.3.conv.0.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.302490234375,
+    "maximum": 0.051544189453125,
+    "mean": -0.0163744050078094,
+    "std": 0.035446437409726486
+  },
+  {
+    "name": "decoder.3.conv.0.weight",
+    "shape": [
+      256,
+      512,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 1179648,
+    "minimum": -0.95458984375,
+    "maximum": 0.63916015625,
+    "mean": -0.00797746782493252,
+    "std": 0.026526652624614597
+  },
+  {
+    "name": "decoder.3.conv.2.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.23876953125,
+    "maximum": 0.176025390625,
+    "mean": -0.03493876755237579,
+    "std": 0.06091443502913201
+  },
+  {
+    "name": "decoder.3.conv.2.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -1.5439453125,
+    "maximum": 0.28662109375,
+    "mean": -0.005483589958607303,
+    "std": 0.022994301567275197
+  },
+  {
+    "name": "decoder.3.conv.4.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.270751953125,
+    "maximum": 0.166015625,
+    "mean": -0.04123848769813776,
+    "std": 0.06963776134428969
+  },
+  {
+    "name": "decoder.3.conv.4.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -1.29296875,
+    "maximum": 0.69189453125,
+    "mean": -0.003520836459756538,
+    "std": 0.04900495112873225
+  },
+  {
+    "name": "decoder.4.conv.0.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.11968994140625,
+    "maximum": 0.04913330078125,
+    "mean": -0.010497513227164745,
+    "std": 0.023982916721798933
+  },
+  {
+    "name": "decoder.4.conv.0.weight",
+    "shape": [
+      256,
+      512,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 1179648,
+    "minimum": -0.9208984375,
+    "maximum": 1.0458984375,
+    "mean": -0.006490247209057998,
+    "std": 0.024786461721078217
+  },
+  {
+    "name": "decoder.4.conv.2.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.170654296875,
+    "maximum": 0.10296630859375,
+    "mean": -0.019341162405908108,
+    "std": 0.04070365941317695
+  },
+  {
+    "name": "decoder.4.conv.2.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -1.1220703125,
+    "maximum": 0.27392578125,
+    "mean": -0.0036804113753734985,
+    "std": 0.01901364092694652
+  },
+  {
+    "name": "decoder.4.conv.4.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.2186279296875,
+    "maximum": 0.11529541015625,
+    "mean": -0.034856281243264675,
+    "std": 0.05235546852010162
+  },
+  {
+    "name": "decoder.4.conv.4.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -0.78857421875,
+    "maximum": 0.45654296875,
+    "mean": -0.0022017617484380025,
+    "std": 0.03787672601874744
+  },
+  {
+    "name": "decoder.5.conv.0.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.234375,
+    "maximum": 0.057708740234375,
+    "mean": -0.018902818905189633,
+    "std": 0.03790376627297156
+  },
+  {
+    "name": "decoder.5.conv.0.weight",
+    "shape": [
+      256,
+      512,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 1179648,
+    "minimum": -1.4130859375,
+    "maximum": 0.703125,
+    "mean": -0.005608773947642476,
+    "std": 0.028482352150855348
+  },
+  {
+    "name": "decoder.5.conv.2.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.224609375,
+    "maximum": 0.11114501953125,
+    "mean": -0.041925168596208096,
+    "std": 0.05363526142251099
+  },
+  {
+    "name": "decoder.5.conv.2.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -1.1630859375,
+    "maximum": 0.293212890625,
+    "mean": -0.004734327047622678,
+    "std": 0.024560367716472294
+  },
+  {
+    "name": "decoder.5.conv.4.bias",
+    "shape": [
+      256
+    ],
+    "dtype": "F16",
+    "parameters": 256,
+    "minimum": -0.47021484375,
+    "maximum": 0.08489990234375,
+    "mean": -0.03354864404536784,
+    "std": 0.06416765410604562
+  },
+  {
+    "name": "decoder.5.conv.4.weight",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 589824,
+    "minimum": -1.724609375,
+    "maximum": 0.4658203125,
+    "mean": -0.006735193178024524,
+    "std": 0.05338606237349791
+  },
+  {
+    "name": "decoder.7.conv.weight",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 65536,
+    "minimum": -0.285400390625,
+    "maximum": 0.26953125,
+    "mean": 1.390454144711839e-05,
+    "std": 0.03790877524324853
+  },
+  {
+    "name": "decoder.8.weight",
+    "shape": [
+      128,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 294912,
+    "minimum": -0.3701171875,
+    "maximum": 0.336181640625,
+    "mean": -0.00010809542578095311,
+    "std": 0.047718661658425865
+  },
+  {
+    "name": "decoder.9.conv.0.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.354248046875,
+    "maximum": 0.1334228515625,
+    "mean": -0.10863100737333298,
+    "std": 0.08180332941424334
+  },
+  {
+    "name": "decoder.9.conv.0.weight",
+    "shape": [
+      128,
+      256,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 294912,
+    "minimum": -0.439208984375,
+    "maximum": 0.54296875,
+    "mean": -0.0004130934507379101,
+    "std": 0.05086995274910436
+  },
+  {
+    "name": "decoder.9.conv.2.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.2166748046875,
+    "maximum": 0.21826171875,
+    "mean": 0.01798262447118759,
+    "std": 0.07123935960145537
+  },
+  {
+    "name": "decoder.9.conv.2.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -1.0126953125,
+    "maximum": 0.336669921875,
+    "mean": -0.0083550105102606,
+    "std": 0.04508458280091735
+  },
+  {
+    "name": "decoder.9.conv.4.bias",
+    "shape": [
+      128
+    ],
+    "dtype": "F16",
+    "parameters": 128,
+    "minimum": -0.090576171875,
+    "maximum": 0.2265625,
+    "mean": 0.05694984644651413,
+    "std": 0.051359750309915624
+  },
+  {
+    "name": "decoder.9.conv.4.weight",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 147456,
+    "minimum": -2.970703125,
+    "maximum": 0.423095703125,
+    "mean": -0.0029655311118403915,
+    "std": 0.06429538582832615
+  },
+  {
+    "name": "encoder.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.1837158203125,
+    "maximum": 0.124755859375,
+    "mean": 0.0028482554480433464,
+    "std": 0.0736072861919667
+  },
+  {
+    "name": "encoder.0.weight",
+    "shape": [
+      64,
+      3,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 1728,
+    "minimum": -0.232177734375,
+    "maximum": 0.229736328125,
+    "mean": -8.967856842058677e-05,
+    "std": 0.0718757715205636
+  },
+  {
+    "name": "encoder.10.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.08673095703125,
+    "maximum": 0.0787353515625,
+    "mean": -0.002687990665435791,
+    "std": 0.03650875888337302
+  },
+  {
+    "name": "encoder.10.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.53076171875,
+    "maximum": 0.2259521484375,
+    "mean": -0.0008370251533859926,
+    "std": 0.03143727677159034
+  },
+  {
+    "name": "encoder.10.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.08428955078125,
+    "maximum": 0.06915283203125,
+    "mean": -0.006094083189964294,
+    "std": 0.03674855210372418
+  },
+  {
+    "name": "encoder.10.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.35546875,
+    "maximum": 0.291259765625,
+    "mean": -0.0007460535529793964,
+    "std": 0.03434446441407417
+  },
+  {
+    "name": "encoder.10.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.06982421875,
+    "maximum": 0.047637939453125,
+    "mean": 0.0038854628801345825,
+    "std": 0.023869675839069366
+  },
+  {
+    "name": "encoder.10.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.6201171875,
+    "maximum": 0.55810546875,
+    "mean": 0.0005074999692927425,
+    "std": 0.03601937965181027
+  },
+  {
+    "name": "encoder.11.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.119384765625,
+    "maximum": 0.1021728515625,
+    "mean": 0.007467630319297314,
+    "std": 0.03451875786175896
+  },
+  {
+    "name": "encoder.11.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.43359375,
+    "maximum": 0.276123046875,
+    "mean": -0.0009119593580382772,
+    "std": 0.031019266824067967
+  },
+  {
+    "name": "encoder.11.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.07305908203125,
+    "maximum": 0.07647705078125,
+    "mean": 0.0019935518503189087,
+    "std": 0.03265961350038033
+  },
+  {
+    "name": "encoder.11.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.416259765625,
+    "maximum": 0.2880859375,
+    "mean": -0.0005213876235454032,
+    "std": 0.03570798577522564
+  },
+  {
+    "name": "encoder.11.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.05450439453125,
+    "maximum": 0.05712890625,
+    "mean": 0.0005207210779190063,
+    "std": 0.01957656462735675
+  },
+  {
+    "name": "encoder.11.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.43408203125,
+    "maximum": 0.445068359375,
+    "mean": 0.0023915148016789723,
+    "std": 0.033594178108012844
+  },
+  {
+    "name": "encoder.12.conv.weight",
+    "shape": [
+      64,
+      64,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 4096,
+    "minimum": -0.154541015625,
+    "maximum": 0.12939453125,
+    "mean": -0.0005114533851156011,
+    "std": 0.05136411215245287
+  },
+  {
+    "name": "encoder.13.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.24951171875,
+    "maximum": 0.256591796875,
+    "mean": -0.0008497107579993705,
+    "std": 0.041841405350282676
+  },
+  {
+    "name": "encoder.14.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.12432861328125,
+    "maximum": 0.07965087890625,
+    "mean": -0.0009813345968723297,
+    "std": 0.04041311558574632
+  },
+  {
+    "name": "encoder.14.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.2454833984375,
+    "maximum": 0.201416015625,
+    "mean": 0.0004288722193450667,
+    "std": 0.02740251505277632
+  },
+  {
+    "name": "encoder.14.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.09295654296875,
+    "maximum": 0.1431884765625,
+    "mean": 0.03282420337200165,
+    "std": 0.04875479084675004
+  },
+  {
+    "name": "encoder.14.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.427001953125,
+    "maximum": 0.1783447265625,
+    "mean": -0.0012309904834384927,
+    "std": 0.02602912600367333
+  },
+  {
+    "name": "encoder.14.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.037811279296875,
+    "maximum": 0.06781005859375,
+    "mean": 0.02584858238697052,
+    "std": 0.026066813255891687
+  },
+  {
+    "name": "encoder.14.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.140869140625,
+    "maximum": 0.13623046875,
+    "mean": 0.008027587933207138,
+    "std": 0.020699526922032065
+  },
+  {
+    "name": "encoder.15.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.18701171875,
+    "maximum": 0.134033203125,
+    "mean": 0.004825294017791748,
+    "std": 0.06039958851748437
+  },
+  {
+    "name": "encoder.15.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.277099609375,
+    "maximum": 0.1885986328125,
+    "mean": -0.0019073817562053187,
+    "std": 0.026165093189983456
+  },
+  {
+    "name": "encoder.15.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.0772705078125,
+    "maximum": 0.160888671875,
+    "mean": 0.01754377782344818,
+    "std": 0.047556698366332285
+  },
+  {
+    "name": "encoder.15.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.390869140625,
+    "maximum": 0.2120361328125,
+    "mean": -0.0017715013705633788,
+    "std": 0.029766767397306753
+  },
+  {
+    "name": "encoder.15.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.045684814453125,
+    "maximum": 0.046173095703125,
+    "mean": 0.0070454999804496765,
+    "std": 0.02050329285237193
+  },
+  {
+    "name": "encoder.15.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.1937255859375,
+    "maximum": 0.1826171875,
+    "mean": -0.00026153780507027276,
+    "std": 0.025533024817256257
+  },
+  {
+    "name": "encoder.16.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.11541748046875,
+    "maximum": 0.2445068359375,
+    "mean": 0.013042781502008438,
+    "std": 0.06895430618690886
+  },
+  {
+    "name": "encoder.16.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.2188720703125,
+    "maximum": 0.25341796875,
+    "mean": -0.00193595702472117,
+    "std": 0.023910880012040017
+  },
+  {
+    "name": "encoder.16.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.1844482421875,
+    "maximum": 0.12298583984375,
+    "mean": 0.004271268844604492,
+    "std": 0.050577835861361116
+  },
+  {
+    "name": "encoder.16.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.282958984375,
+    "maximum": 0.26806640625,
+    "mean": -0.0021514749742992637,
+    "std": 0.028283118690938528
+  },
+  {
+    "name": "encoder.16.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.02935791015625,
+    "maximum": 0.0345458984375,
+    "mean": 0.0015104599297046661,
+    "std": 0.01502917363612707
+  },
+  {
+    "name": "encoder.16.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.184814453125,
+    "maximum": 0.2156982421875,
+    "mean": -0.0005162172326688758,
+    "std": 0.024799698272401742
+  },
+  {
+    "name": "encoder.17.bias",
+    "shape": [
+      16
+    ],
+    "dtype": "F16",
+    "parameters": 16,
+    "minimum": -0.035247802734375,
+    "maximum": 0.02655029296875,
+    "mean": 0.006680488586425781,
+    "std": 0.018957349084419796
+  },
+  {
+    "name": "encoder.17.weight",
+    "shape": [
+      16,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 9216,
+    "minimum": -0.1951904296875,
+    "maximum": 0.19677734375,
+    "mean": 6.618028661857049e-05,
+    "std": 0.02682183715664707
+  },
+  {
+    "name": "encoder.2.conv.weight",
+    "shape": [
+      64,
+      128,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 8192,
+    "minimum": -0.67138671875,
+    "maximum": 0.47119140625,
+    "mean": -0.0008738891192479059,
+    "std": 0.059846155977773374
+  },
+  {
+    "name": "encoder.3.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.306884765625,
+    "maximum": 0.257568359375,
+    "mean": 0.0003433511479266195,
+    "std": 0.03599088702841695
+  },
+  {
+    "name": "encoder.4.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.07293701171875,
+    "maximum": 0.055755615234375,
+    "mean": 0.0012039970606565475,
+    "std": 0.022413746394810887
+  },
+  {
+    "name": "encoder.4.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.6884765625,
+    "maximum": 0.413818359375,
+    "mean": -0.001398023994018634,
+    "std": 0.04069428961023821
+  },
+  {
+    "name": "encoder.4.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.097412109375,
+    "maximum": 0.06768798828125,
+    "mean": 0.017888814210891724,
+    "std": 0.02834408947251597
+  },
+  {
+    "name": "encoder.4.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.76611328125,
+    "maximum": 0.3662109375,
+    "mean": -0.0015056791695921372,
+    "std": 0.037354905365914175
+  },
+  {
+    "name": "encoder.4.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.049468994140625,
+    "maximum": 0.06060791015625,
+    "mean": 0.02152903750538826,
+    "std": 0.02190638485157209
+  },
+  {
+    "name": "encoder.4.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.5625,
+    "maximum": 0.352294921875,
+    "mean": 0.0006501009532560905,
+    "std": 0.033425366117402815
+  },
+  {
+    "name": "encoder.5.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.0731201171875,
+    "maximum": 0.051513671875,
+    "mean": 0.008983680978417397,
+    "std": 0.027428955521714555
+  },
+  {
+    "name": "encoder.5.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.68115234375,
+    "maximum": 0.290771484375,
+    "mean": -0.0013917893164842906,
+    "std": 0.03506411485435229
+  },
+  {
+    "name": "encoder.5.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.08856201171875,
+    "maximum": 0.057037353515625,
+    "mean": 0.013832688331604004,
+    "std": 0.028418348596244633
+  },
+  {
+    "name": "encoder.5.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.461669921875,
+    "maximum": 0.2081298828125,
+    "mean": 0.00019334696601921073,
+    "std": 0.029235763002869872
+  },
+  {
+    "name": "encoder.5.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.0311126708984375,
+    "maximum": 0.047515869140625,
+    "mean": 0.01048937439918518,
+    "std": 0.020347973953858345
+  },
+  {
+    "name": "encoder.5.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.379150390625,
+    "maximum": 0.372314453125,
+    "mean": 0.0018362302475401924,
+    "std": 0.030268170345055006
+  },
+  {
+    "name": "encoder.6.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.1123046875,
+    "maximum": 0.10693359375,
+    "mean": 0.007316455245018005,
+    "std": 0.02945196991290673
+  },
+  {
+    "name": "encoder.6.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.40625,
+    "maximum": 0.51220703125,
+    "mean": -0.0008276356117373022,
+    "std": 0.0341175079600959
+  },
+  {
+    "name": "encoder.6.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.0364990234375,
+    "maximum": 0.053680419921875,
+    "mean": 0.0032549872994422913,
+    "std": 0.02037031439289252
+  },
+  {
+    "name": "encoder.6.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.349609375,
+    "maximum": 0.454345703125,
+    "mean": -7.226153846002287e-05,
+    "std": 0.035251807316939054
+  },
+  {
+    "name": "encoder.6.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.02850341796875,
+    "maximum": 0.0516357421875,
+    "mean": 0.004962288774549961,
+    "std": 0.01962870555848938
+  },
+  {
+    "name": "encoder.6.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.223388671875,
+    "maximum": 0.2232666015625,
+    "mean": 0.0011859513081920643,
+    "std": 0.031841059103361206
+  },
+  {
+    "name": "encoder.7.conv.weight",
+    "shape": [
+      64,
+      128,
+      1,
+      1
+    ],
+    "dtype": "F16",
+    "parameters": 8192,
+    "minimum": -0.1400146484375,
+    "maximum": 0.1707763671875,
+    "mean": 9.512219548923895e-05,
+    "std": 0.04017603088962201
+  },
+  {
+    "name": "encoder.8.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.253662109375,
+    "maximum": 0.211669921875,
+    "mean": 0.000381394054986433,
+    "std": 0.04407602088904662
+  },
+  {
+    "name": "encoder.9.conv.0.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.06195068359375,
+    "maximum": 0.08074951171875,
+    "mean": 0.009102858603000641,
+    "std": 0.03241435837934636
+  },
+  {
+    "name": "encoder.9.conv.0.weight",
+    "shape": [
+      64,
+      128,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 73728,
+    "minimum": -0.468505859375,
+    "maximum": 0.327392578125,
+    "mean": -0.0004365070862048823,
+    "std": 0.03379789539216115
+  },
+  {
+    "name": "encoder.9.conv.2.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.047332763671875,
+    "maximum": 0.125732421875,
+    "mean": 0.03801847994327545,
+    "std": 0.037525473196863224
+  },
+  {
+    "name": "encoder.9.conv.2.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.461181640625,
+    "maximum": 0.2335205078125,
+    "mean": -0.0005208786606090143,
+    "std": 0.030116682155365993
+  },
+  {
+    "name": "encoder.9.conv.4.bias",
+    "shape": [
+      64
+    ],
+    "dtype": "F16",
+    "parameters": 64,
+    "minimum": -0.04248046875,
+    "maximum": 0.0635986328125,
+    "mean": 0.020104803144931793,
+    "std": 0.024371288707133218
+  },
+  {
+    "name": "encoder.9.conv.4.weight",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "dtype": "F16",
+    "parameters": 36864,
+    "minimum": -0.5263671875,
+    "maximum": 0.1915283203125,
+    "mean": 0.0071151628378882175,
+    "std": 0.028287153173578012
+  }
+]

@@ -1,0 +1,8 @@
+torch
+numpy
+safetensors
+tqdm
+imageio
+imageio-ffmpeg
+pillow
+packaging
