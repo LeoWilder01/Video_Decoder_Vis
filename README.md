@@ -107,3 +107,35 @@ MemBlock 将当前特征与前一时间位置的输入特征按通道拼接，�
 - 全尺寸 `[1,21,16,60,104] → [1,81,3,480,832]` 已完成 CPU 实际解码与播放，约25秒；两处 scalar 修改后重新解码，检测到非零 RGB 差异，记录于 `reports/web-validation.json`。
 
 尚无真实 clean latent，因此本阶段没有关于 channel 语义、物体或运动变化的实证结论。
+
+## Geometric sections (current UI)
+
+The original overview, three rails, nested module representations, dimension
+labels and bottom summary are preserved. The separate study has been removed.
+
+Only selected latent/output arrays expand, as noninteractive, untextured wireframe
+placeholders. At most eight rows follow the face edges. Weight tensors never
+expand; c and input-channel i remain inspectable in the existing preview. Only
+the representative on the main axis loads and draws actual values. Placeholder
+bounds never affect camera limits, and no background all-channel fetch runs.
+
+Every primary latent volume's front top-right corner lies on the same axis.
+Parameter links show input → weight → bias → convolution output; bias is omitted
+where the actual model has none. Memory blocks retain three separate convolution
+parameter groups, connected to their corresponding internal output nodes.
+
+Main intermediate data plates use one linear spatial scale: 120×208 matches
+the input 60×104 plate size; 60×104 is half as wide and half as tall. The input
+size stays unchanged. Larger stages receive more axial spacing. Small internal
+module thumbnails remain schematic. True dimensions appear in the preview. Full grids are never reduced to make
+numbers fit. First double-click frames a member with a 260% ceiling, second shows
+numeric cells, third returns to the overview. Wheel changes the selected group's
+depth; Ctrl/Command + wheel zooms. Pan bounds stay fixed when a placeholder array is expanded.
+
+Activation values require Compute for the desired time slice. Only the inspected channel plane loads;
+uncomputed times are empty, never duplicated or invented.
+
+Overview notes are transparent screen-space text and stay visible at every zoom.
+Decorative MemBlock brackets, rail drop lines, and operation ticks are removed.
+Computation arrows attach to the midpoints of the left/right vertical face edges;
+bias placement aligns its input port horizontally with the weight output port.

@@ -1,0 +1,27 @@
+{
+  "baseline_commit": "2ea89aa99a9a0d6b5b8aac0fcc842018d0b643d8",
+  "checks": [
+    "64 preview tensors returned; first convolution preview exactly matches real weights",
+    "23 outer operations exposed",
+    "manual scalar edit and keyboard increment",
+    "restore baseline",
+    "convolution arithmetic verified against actual output",
+    "full-size real decode completed",
+    "browser error log empty"
+  ],
+  "output": {
+    "id": "17a0a7326b57",
+    "revision": 4,
+    "shape": [
+      3,
+      81,
+      480,
+      832
+    ],
+    "fps": 16,
+    "seconds": 33.63381505012512,
+    "video": "/runs/17a0a7326b57.mp4",
+    "synthetic": true
+  },
+  "tests": "4 numerical regression tests passed; expanded with convolution arithmetic checks"
+}

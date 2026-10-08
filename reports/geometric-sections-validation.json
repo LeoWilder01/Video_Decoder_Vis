@@ -1,0 +1,25 @@
+{
+  "ui": "single canvas, upright sections, semantic zoom, no modal inspectors",
+  "checks": [
+    "input scalar edit persisted, then restored",
+    "selected wheel changed t while retaining zoom",
+    "coordinate input immediately updated section",
+    "weight edit controls absent",
+    "browser error log empty",
+    "4 numerical regression tests passed"
+  ],
+  "output": {
+    "id": "f77c2c0ecb0c",
+    "revision": 4,
+    "shape": [
+      3,
+      81,
+      480,
+      832
+    ],
+    "fps": 16,
+    "seconds": 29.024681091308594,
+    "video": "/runs/f77c2c0ecb0c.mp4",
+    "synthetic": true
+  }
+}

@@ -164,6 +164,17 @@ class Lab:
 
     def work(self,job,z,body):
         start=time.perf_counter()
+        handles=[]
+        last_update=[0.]
+        def location(index):
+            def record(module, inputs):
+                now=time.monotonic()
+                if now-last_update[0]>.08:
+                    job['current_layer']=f'decoder.{index}'
+                    last_update[0]=now
+            return record
+        for index,module in enumerate(self.model.decoder):
+            handles.append(module.register_forward_pre_hook(location(index)))
         try:
             with torch.inference_mode():
                 if job['kind']=='decode':
@@ -174,6 +185,7 @@ class Lab:
         except Exception as error:
             job.update(state='error',error=str(error))
         finally:
+            for handle in handles:handle.remove()
             self.worker_lock.release()
 
     def queue(self,z):
@@ -188,6 +200,20 @@ class Lab:
         queue=self.queue(z);memory=[None]*len(self.model.decoder)
         writer=imageio.get_writer(str(stem)+'.mp4',fps=16,macro_block_size=1,codec='libx264',quality=7)
         n=0
+        captures={};counts={};handles=[]
+        records=[r for group in self.graph for r in [group,*group['children']]]
+        for record in records:
+            name=record['name'];_,times,h,w=record['shape']
+            # Main slabs retain channel 0 across time; small internal slabs retain t=0.
+            saved_times=times if name.count('.')==1 else 1
+            captures[name]=np.lib.format.open_memmap(str(stem)+'.'+name+'.npy',mode='w+',dtype=np.float32,shape=(saved_times,h,w))
+            counts[name]=0
+            def capture(module,inputs,output,name=name):
+                start=counts[name];batch=output.shape[0];target=captures[name]
+                take=min(batch,len(target)-start)
+                if take>0:target[start:start+take]=output[:take,0].detach().cpu().numpy()
+                counts[name]+=batch
+            handles.append(self.model.get_submodule(name).register_forward_hook(capture))
         try:
             while queue:
                 rgb=apply_model_with_memblocks_sequential_single_step(self.model.decoder,memory,queue)
@@ -200,10 +226,13 @@ class Lab:
                 n+=1
                 job['progress']=n/(frames+3)
         finally:
+            for handle in handles:handle.remove()
+            for arr in captures.values():arr.flush()
             writer.close();storage.flush()
         if n!=frames+3:
             raise RuntimeError(f'Wrong frame count {n}')
         meta=dict(id=job['id'],revision=job['revision'],shape=[3,frames,H*8,W*8],fps=16,
+            activations={name:dict(shape=list(arr.shape),channel=0) for name,arr in captures.items()},
             seconds=time.time()-job['started'],video=f'/runs/{job["id"]}.mp4',synthetic=True)
         (Path(str(stem)+'.json')).write_text(json.dumps(meta))
         with self.lock:
@@ -211,21 +240,37 @@ class Lab:
             # Keep only two generated runs and their exact RGB arrays on disk.
             while len(self.results)>2:
                 old=self.results.pop(0)
+                for name in old.get('activations',{}):
+                    (RUNS/(old['id']+'.'+name+'.npy')).unlink(missing_ok=True)
                 for suffix in ('.mp4','.npy','.json'):
                     (RUNS/(old['id']+suffix)).unlink(missing_ok=True)
 
     def capture(self,job,z,body):
         name=body['target']['name'];target_time=int(body.get('time',0))
         module=self.model.get_submodule(name)
-        count=0;captured=None
+        count=0;captured=None;arithmetic=None
         class Finished(Exception):
             pass
         def hook(mod,inputs,output):
-            nonlocal count,captured
+            nonlocal count,captured,arithmetic
             batch=output.shape[0]
             if count<=target_time<count+batch:
                 # Clone before any subsequent inplace ReLU can mutate the output.
                 captured=output[target_time-count].detach().cpu().numpy().copy()
+                if isinstance(mod,torch.nn.Conv2d):
+                    # A real dot product at output channel 0, y=x=0, including padding.
+                    frame=inputs[0][target_time-count]
+                    py,px=mod.padding;kh,kw=mod.kernel_size
+                    padded=torch.nn.functional.pad(frame,(px,px,py,py))
+                    patch=padded[:,:kh,:kw]
+                    kernel=mod.weight[0]
+                    products=patch*kernel
+                    bias=float(mod.bias[0]) if mod.bias is not None else 0.
+                    arithmetic=dict(input_patch=patch[0].tolist(),kernel=kernel[0].tolist(),
+                        products=products[0].tolist(),channel_sum=float(products[0].sum()),
+                        all_channel_sum=float(products.sum()),bias=bias,
+                        output=float(captured[0,0,0]),input_channels=int(frame.shape[0]),
+                        location=[0,target_time,0,0])
                 raise Finished()
             count+=batch
             job['progress']=min(0.99,count/max(1,target_time+1))
@@ -245,7 +290,7 @@ class Lab:
             raise RuntimeError('Activation was not captured')
         meta=dict(id=job['id'],layer=name,time=target_time,shape=list(captured.shape),revision=job['revision'],
             minimum=float(captured.min()),maximum=float(captured.max()),mean=float(captured.mean()),
-            std=float(captured.std()),seconds=time.time()-job['started'])
+            std=float(captured.std()),seconds=time.time()-job['started'],arithmetic=arithmetic)
         with self.lock:
             self.trace=dict(meta=meta,array=captured)
 
@@ -300,7 +345,16 @@ class Handler(BaseHTTPRequestHandler):
                 buffer=io.BytesIO()
                 with self.lab.lock:np.save(buffer,self.lab.z,allow_pickle=False)
                 return self.send(buffer.getvalue(),kind='application/octet-stream',extra={'Content-Disposition':'attachment; filename="latent-CTHW.npy"'})
+            if p=='/api/weight-previews':
+                return self.send({name:dict(shape=list(a.shape), values=a.reshape(-1)[:48].tolist()) for name,a in self.lab.parameters.items()})
             if p=='/api/weight':return self.array(self.lab.parameters[q['name']])
+            if p=='/api/decode-activation':
+                with self.lab.lock:
+                    result=next((r for r in self.lab.results if r['id']==q.get('id')),None)
+                    name=q.get('layer');t=int(q.get('time',0))
+                    if result is None or name not in result.get('activations',{}):raise ValueError('Activation not recorded')
+                    if not 0<=t<result['activations'][name]['shape'][0]:raise ValueError('Time not recorded')
+                    return self.array(np.load(RUNS/(result['id']+'.'+name+'.npy'),mmap_mode='r')[t])
             if p=='/api/activation':
                 with self.lab.lock:
                     trace=self.lab.trace

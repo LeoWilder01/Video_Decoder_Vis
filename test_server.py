@@ -51,6 +51,17 @@ class LaboratoryTests(unittest.TestCase):
                 self.assertEqual(actual.shape,(9,3,64,64))
                 np.testing.assert_array_equal(actual,reference)
                 self.assertGreater((Path(tmp)/'test.mp4').stat().st_size,100)
+                result=self.lab.results[-1]
+                records={r['name']:r for group in self.lab.graph for r in [group,*group['children']]}
+                for name,meta in result['activations'].items():
+                    saved=np.load(Path(tmp)/('test.'+name+'.npy'))
+                    shape=records[name]['shape']
+                    self.assertEqual(list(saved.shape),[shape[1] if name.count('.')==1 else 1,*shape[2:]])
+                    self.assertTrue(np.isfinite(saved).all())
+                for name,t in [('decoder.1',1),('decoder.9',1),('decoder.13',3),('decoder.22',7),('decoder.3.conv.0',0)]:
+                    self.lab.capture(self.job(),z,dict(target=records[name],time=t))
+                    saved=np.load(Path(tmp)/('test.'+name+'.npy'))
+                    np.testing.assert_array_equal(saved[t],self.lab.trace['array'][0])
             finally:
                 server.RUNS=old
                 self.lab.results=[]
@@ -68,6 +79,10 @@ class LaboratoryTests(unittest.TestCase):
             with torch.inference_mode():
                 self.lab.capture(self.job(),self.lab.z.copy(),dict(target=records[name],time=t))
             np.testing.assert_array_equal(self.lab.trace['array'],expected)
+            math=self.lab.trace['meta'].get('arithmetic')
+            if math:
+                np.testing.assert_allclose(np.array(math['input_patch'])*np.array(math['kernel']),math['products'],atol=1e-7)
+                self.assertAlmostEqual(math['all_channel_sum']+math['bias'],float(expected[0,0,0]),places=5)
         self.assertEqual(len(self.lab.parameters),64)
         self.assertEqual(len(self.lab.graph),23)
 

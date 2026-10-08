@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "Blank clicks and tensor selection keep the 36% overview scale",
+    "Input caption frames all 16 input channels",
+    "At 345%: full 104-row \u00d7 60-column display, numerical labels hidden",
+    "At 5887%: same full grid, labels rendered in readable cells",
+    "Clicked displayed cell resolves to z[0,0,1,1] = 1.5452452898025513; verified against backend",
+    "UI source contains no Han characters",
+    "Input unchanged during verification"
+  ],
+  "input_shape": [
+    16,
+    21,
+    60,
+    104
+  ],
+  "display_axes": {
+    "horizontal": "y (60)",
+    "vertical": "x (104)"
+  },
+  "storage": "C,T,H,W unchanged"
+}
