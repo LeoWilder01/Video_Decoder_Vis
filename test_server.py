@@ -21,6 +21,38 @@ class LaboratoryTests(unittest.TestCase):
     def job(self):
         return dict(id='test',revision=self.lab.revision,started=time.time(),progress=0)
 
+    def test_fixed_sample_restores_exact_values_and_rejects_unknown(self):
+        from unittest.mock import patch
+        from safetensors.numpy import save_file
+        with tempfile.TemporaryDirectory() as directory, patch.object(server,'LATENTS',Path(directory)):
+            z=np.zeros((16,21,60,104),np.float32);z[0,0,0,0]=1.25
+            save_file({'latent':z},str(Path(directory)/'example.safetensors'),metadata=dict(layout='CTHW',model_family='wan2.1',stage='final_clean',latent_space='diffusion'))
+            self.lab.select_preset('example.safetensors')
+            np.testing.assert_array_equal(self.lab.z,z)
+            self.lab.z[0,0,0,0]=9
+            self.lab.select_preset('example.safetensors')
+            self.assertEqual(self.lab.z[0,0,0,0],1.25)
+            np.testing.assert_array_equal(self.lab.baseline,z)
+            with self.assertRaises(ValueError):self.lab.select_preset('../example.safetensors')
+            self.lab.worker_lock.acquire()
+            try:
+                with self.assertRaises(ValueError):self.lab.select_preset('random-42')
+            finally:self.lab.worker_lock.release()
+            self.lab.select_preset('random-42');a=self.lab.z.copy()
+            self.lab.select_preset('random-42');np.testing.assert_array_equal(a,self.lab.z)
+
+    def test_lens_reads_real_neighbor_slices_and_clips_edges(self):
+        for t,expected in [(0,[0,1]),(1,[0,1,2]),(2,[1,2])]:
+            result=self.lab.lens_patch('z.0',0,t,6,6,self.lab.revision)
+            self.assertEqual([p['t'] for p in result['layers']],expected)
+            for p in result['layers']:
+                np.testing.assert_array_equal(p['values'],self.lab.z[0,p['t'],6:9,6:9])
+        name='decoder.1.weight'
+        result=self.lab.lens_patch(name,0,1,0,0,self.lab.revision)
+        for p in result['layers']:
+            np.testing.assert_array_equal(p['values'],self.lab.parameters[name][0,p['t'],:3,:3])
+        with self.assertRaises(ValueError):self.lab.lens_patch('z.0',0,0,0,0,-1)
+
     def test_edit_changes_exactly_one_scalar_and_rejects_stale_revision(self):
         before=self.lab.z.copy();revision=self.lab.revision
         edit=dict(revision=revision,c=4,t=1,y=3,x=2,value=1.25)

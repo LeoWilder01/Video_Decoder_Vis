@@ -12,6 +12,7 @@ from urllib.parse import urlparse, parse_qs
 import imageio.v2 as imageio
 import numpy as np
 import torch
+from safetensors import safe_open
 
 from experiment import ROOT, TAEHV, load_decoder
 # Use classes from the same imported module as TAEHV (isinstance checks matter).
@@ -19,6 +20,7 @@ from taehv import TWorkItem, apply_model_with_memblocks_sequential_single_step
 
 WEB = ROOT / 'web'
 RUNS = ROOT / 'experiments' / 'web'
+LATENTS = ROOT / 'latents'
 
 
 def describe(module):
@@ -86,6 +88,7 @@ class Lab:
             raise ValueError('Seed must be in [0, 2^32)')
         with self.lock:
             self.shape=list(shape)
+            self.preset='random-42'
             self.seed=seed
             self.z=np.random.default_rng(seed).standard_normal(shape,dtype=np.float32)
             self.baseline=self.z.copy()
@@ -94,9 +97,65 @@ class Lab:
             self.trace=None
             self.graph=topology(shape)
 
+    def presets(self):
+        items=[dict(id='random-42',label='Random · seed 42')]
+        for path in sorted(LATENTS.glob('*.safetensors')):
+            items.append(dict(id=path.name,label=path.stem))
+        return items
+
+    def select_preset(self, name):
+        if not self.worker_lock.acquire(blocking=False):
+            raise ValueError('Wait for the current decode before switching samples')
+        try:
+            if name not in [p['id'] for p in self.presets()]:raise ValueError('Unknown sample')
+            shape=(16,21,60,104)
+            if name=='random-42':
+                z=np.random.default_rng(42).standard_normal(shape,dtype=np.float32)
+            else:
+                with safe_open(str(LATENTS/name),framework='np') as f:
+                    meta=f.metadata() or {}
+                    if any(meta.get(k)!=v for k,v in dict(layout='CTHW',model_family='wan2.1',stage='final_clean',latent_space='diffusion').items()):
+                        raise ValueError('Expected Wan 2.1 final_clean diffusion-space CTHW metadata')
+                    z=f.get_tensor('latent').astype(np.float32)
+                if z.shape!=shape or not np.isfinite(z).all():raise ValueError('Expected finite [16,21,60,104] latent')
+            with self.lock:
+                if tuple(self.shape)!=shape:self.graph=topology(shape)
+                self.shape=list(shape);self.z=z.copy();self.baseline=z.copy()
+                self.seed=42 if name=='random-42' else None
+                self.preset=name;self.revision+=1;self.history=[];self.trace=None
+                return self.status()
+        finally:
+            self.worker_lock.release()
+
+    def lens_patch(self, name, c, t, y, x, revision):
+        """Return only a 3x3 neighborhood in adjacent slices; never compute a trace."""
+        with self.lock:
+            if revision != self.revision:
+                raise ValueError('Stale revision')
+            result=next((r for r in reversed(self.results) if r['revision']==revision),None)
+            layers=[]
+            for depth in range(max(0,t-1),t+2):
+                plane=None
+                if name.startswith('z.'):
+                    if 0<=c<self.z.shape[0] and depth<self.z.shape[1]:plane=self.z[c,depth]
+                elif name in self.parameters:
+                    a=self.parameters[name]
+                    a=a.reshape((*a.shape,)+(1,)*(4-a.ndim))
+                    if 0<=c<a.shape[0] and depth<a.shape[1]:plane=a[c,depth]
+                elif result and name=='rgb':
+                    if depth<result['shape'][1] and 0<=c<3:plane=np.load(RUNS/(result['id']+'.npy'),mmap_mode='r')[depth,c]
+                elif result and c==0 and name in result.get('activations',{}):
+                    if depth<result['activations'][name]['shape'][0]:plane=np.load(RUNS/(result['id']+'.'+name+'.npy'),mmap_mode='r')[depth]
+                if plane is None:
+                    trace=self.trace
+                    if trace and trace['meta']['revision']==revision and trace['meta']['layer']==name and trace['meta']['time']==depth and 0<=c<trace['array'].shape[0]:plane=trace['array'][c]
+                if plane is not None and 0<=y<plane.shape[0] and 0<=x<plane.shape[1]:
+                    layers.append(dict(t=depth,values=plane[y:y+3,x:x+3].tolist()))
+            return dict(revision=revision,layers=layers)
+
     def status(self):
         with self.lock:
-            return dict(shape=self.shape,seed=self.seed,revision=self.revision,
+            return dict(shape=self.shape,seed=self.seed,preset=self.preset,revision=self.revision,
                 changed_scalars=int(np.count_nonzero(self.z!=self.baseline)),
                 history=self.history[-16:],jobs=list(self.jobs.values())[-6:],results=self.results,
                 trace=None if self.trace is None else self.trace['meta'])
@@ -331,6 +390,8 @@ class Handler(BaseHTTPRequestHandler):
         if not self.trusted():return self.send({'error':'Local access only'},403)
         url=urlparse(self.path);q={k:v[0] for k,v in parse_qs(url.query).items()};p=url.path
         try:
+            if p=='/api/lens':return self.send(self.lab.lens_patch(q['name'],int(q['c']),int(q['t']),int(q['y']),int(q['x']),int(q['revision'])))
+            if p=='/api/presets':return self.send(self.lab.presets())
             if p=='/api/status':return self.send(self.lab.status())
             if p=='/api/model':
                 inventory=json.loads((ROOT/'reports/weights-inventory.json').read_text())
@@ -374,7 +435,7 @@ class Handler(BaseHTTPRequestHandler):
                 filename=p.removeprefix('/runs/')
                 if not any(filename==r['id']+'.mp4' for r in self.lab.results):raise ValueError('Video not found')
                 return self.video(RUNS/filename)
-            files={'/':'index.html','/app.js':'app.js','/style.css':'style.css'}
+            files={'/':'index.html','/app.js':'app.js','/full-model/':'full-model/index.html','/full-model':'full-model/index.html','/full-model/app.js':'full-model/app.js','/full-model/wan-architecture.js':'full-model/wan-architecture.js','/style.css':'style.css'}
             if p not in files:return self.send({'error':'Not found'},404)
             kinds={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8'}
             file=WEB/files[p]
@@ -407,6 +468,7 @@ class Handler(BaseHTTPRequestHandler):
             if size>16384 or self.headers.get('Content-Type')!='application/json':
                 raise ValueError('Expected a small JSON request')
             body=json.loads(self.rfile.read(size));p=urlparse(self.path).path
+            if p=='/api/preset':return self.send(self.lab.select_preset(body.get('id')))
             if p=='/api/edit':return self.send(self.lab.edit(body))
             if p=='/api/reset':
                 if self.lab.worker_lock.locked():raise ValueError('Wait for active computation before resetting')

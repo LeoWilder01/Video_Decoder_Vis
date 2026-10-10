@@ -2,6 +2,25 @@
 
 当前完成：官方 TAEW2.1 权重检查、decoder 单独提取、四种 latent 干预、交互网页、真实逐层激活查看、完整尺寸 RGB 解码。尚未完成：真实视频 latent 的语义实验、原版 Wan VAE 对照。不要把随机输入测试当作颜色、物体、运动的语义证据。
 
+## 从另一台电脑恢复当前版本
+
+代码与网页资源保存在本仓库；**权重二进制不在 Git 中**。下载脚本从固定的上游 commit 获取官方文件，验证 SHA-256，再无损提取与本机相同的 decoder。首次安装需要联网；之后运行无需下载模型。需要 Python 3.9–3.12（建议 3.11）和 pip。
+
+```sh
+git clone https://github.com/LeoWilder01/Video_Decoder_Vis.git
+cd Video_Decoder_Vis
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-lock.txt
+.venv/bin/python download_weights.py
+.venv/bin/python server.py --port 8766
+```
+
+打开 <http://127.0.0.1:8766/>。Windows 将 `.venv/bin/python` 换成 `.venv\Scripts\python.exe`。若平台不支持锁定依赖版本，可使用 `requirements.txt`，但依赖版本与浮点结果可能有所不同。
+
+页面布局和功能与当前版本一致。首次启动视频为空，点击 Decode 生成视频及中间激活。初始 latent 使用固定 seed=42。运行中的编辑、已生成视频和缓存不在 Git 中，不能用克隆恢复该次会话；不同硬件也不保证逐位相同的浮点结果或相同速度。
+
+当前页面是单一轴测主图，包含权重/数值预览、逐层激活、视频时间剖面及 PLAY / RESET / DOWNLOAD 控件。下方早期实验说明包含历史界面描述，以当前代码与本节启动步骤为准。
+
 ## 网页实验室
 
 ```sh
