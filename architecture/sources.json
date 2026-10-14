@@ -1,0 +1,7 @@
+{
+  "model": "Wan2.1-T2V-1.3B",
+  "transformer_config": "https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B-Diffusers/raw/main/transformer/config.json",
+  "forward_implementation": "https://github.com/Wan-Video/Wan2.1/blob/main/wan/modules/model.py",
+  "text_encoder_config": "https://huggingface.co/google/umt5-xxl/raw/main/config.json",
+  "scope": "Structure only upstream; existing TAEW2.1 decoder remains numerical. Batch 1. Padded text length 512. Attention matrices represent logical operations, not materialized buffers. Tensor silhouettes schematic, labels exact. CFG reuses the same backbone. Scheduler is a solver boundary, not an extra neural layer."
+}
